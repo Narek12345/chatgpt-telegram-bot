@@ -1,0 +1,32 @@
+# Virtual environment.
+env/
+venv/
+__pycache__/
+
+# Database.
+*.db
+*.sqlite3
+
+# Logs.
+*.log
+
+# Config files IDE.
+.idea/
+.vscode/
+
+# System files MacOS/Windows.
+.DS_Store
+Thumbs.db
+
+# Settings pycharm.
+*.iml
+
+# Installed dependencies.
+*.egg
+*.egg-info
+dist/
+build/
+*.pyc
+
+# Config keys.
+.env
