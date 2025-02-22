@@ -59,6 +59,13 @@ class TelegramAccount(Base):
 		return self.number_chatgpt_tokens
 
 
+	def update_tokens(self, db: Session, tokens: int):
+		"""Обновляет количество токенов пользователя."""
+		self.number_chatgpt_tokens = tokens
+		db.commit()
+		return self
+
+
 
 class Message(Base):
 	__tablename__ = "messages"
