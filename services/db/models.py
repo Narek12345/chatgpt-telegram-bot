@@ -18,10 +18,20 @@ class TelegramAccount(Base):
 	username = Column(String(100), nullable=True)
 	phone_number = Column(String(20), nullable=True)
 	is_admin = Column(Boolean, default=False)
-	registration_date = Column(DateTime, default=datetime.utcnow)
+	created_at = Column(DateTime, default=datetime.utcnow)
 
 	messages = relationship("Message", back_populates="user", cascade="all, delete-orphan")
 	tokens = relationship("ChatGPTToken", back_populates="user", cascade="all delete-orphan")
+
+
+	@classmethod
+	def create(cls, db: Session, telegram_id: int, **kwargs):
+		"""Создает нового пользователя."""
+		user = cls(telegram_id=telegram_id, **kwargs)
+		db.add(user)
+		db.commit()
+		db.refresh()
+		return user
 
 
 
