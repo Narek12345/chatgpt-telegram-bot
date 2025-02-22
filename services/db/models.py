@@ -40,6 +40,14 @@ class TelegramAccount(Base):
 		return db.query(cls).filter(cls.telegram_id == telegram_id).first()
 
 
+	def update(self, db: Session, **kwargs):
+		"""Обновляет данные пользователя."""
+		for key, value in kwargs.items():
+			setattr(self, key, value)
+		db.commit()
+		return self
+
+
 
 class Message(Base):
 	__tablename__ = "messages"
