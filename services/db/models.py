@@ -35,3 +35,11 @@ class Message(Base):
 
 	user = relationship("TelegramAccount", back_populates="messages")
 
+
+
+class ChatGPTToken(Base):
+	__tablename__ = "chatgpt_tokens"
+
+	chatgpt_token_id = Column(String(100). primary_key=True, unique=True)
+	number_of_tokens = Column(Integerm, default=0)
+	telegram_id = Column(BigInteger, ForeignKey("telegram_accounts.telegram_id", on_delete="CASCADE"))
