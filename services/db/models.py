@@ -91,6 +91,13 @@ class Message(Base):
 		return db.query(cls).filter(cls.telegram_id == telegram_id).all()
 
 
+	@classmethod
+	def delete_by_user(cls, db: Session, telegram_id: int):
+		"""Удаляет все сообщения пользователя."""
+		db.query(cls).filter(cls.telegram_id == telegram_id).delete()
+		db.commit()
+
+
 
 class ChatGPTToken(Base):
 	__tablename__ = "chatgpt_tokens"
