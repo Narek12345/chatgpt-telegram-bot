@@ -15,10 +15,13 @@ class TelegramAccount(Base):
 	telegram_id = Column(BigInteger, primary_key=True, unique=True, index=True)
 	firstname = Column(String(100), nullable=True)
 	lastname = Column(String(100), nullable=True)
-	username = Column(String(100), nullable=True, unique=True)
+	username = Column(String(100), nullable=True)
 	phone_number = Column(String(20), nullable=True)
 	is_admin = Column(Boolean, default=False)
 	registration_date = Column(DateTime, default=datetime.utcnow)
+
+	messages = relationship("Message", back_populates="user", cascade="all, delete-orphan")
+	tokens = relationship("ChatGPTToken", back_populates="user", cascade="all delete-orphan")
 
 
 
@@ -40,6 +43,6 @@ class Message(Base):
 class ChatGPTToken(Base):
 	__tablename__ = "chatgpt_tokens"
 
-	chatgpt_token_id = Column(String(100). primary_key=True, unique=True)
-	number_of_tokens = Column(Integerm, default=0)
+	id = Column(String(100), primary_key=True, unique=True)
+	number_of_tokens = Column(Integer, default=0)
 	telegram_id = Column(BigInteger, ForeignKey("telegram_accounts.telegram_id", on_delete="CASCADE"))
