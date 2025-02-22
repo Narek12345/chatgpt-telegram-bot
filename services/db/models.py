@@ -18,10 +18,10 @@ class TelegramAccount(Base):
 	username = Column(String(100), nullable=True)
 	phone_number = Column(String(20), nullable=True)
 	is_admin = Column(Boolean, default=False)
+	number_chatgpt_tokens = Column(Integer, default=50000)
 	created_at = Column(DateTime, default=datetime.utcnow)
 
 	messages = relationship("Message", back_populates="user", cascade="all, delete-orphan")
-	tokens = relationship("ChatGPTToken", back_populates="user", cascade="all delete-orphan")
 
 
 	@classmethod
@@ -96,12 +96,3 @@ class Message(Base):
 		"""Удаляет все сообщения пользователя."""
 		db.query(cls).filter(cls.telegram_id == telegram_id).delete()
 		db.commit()
-
-
-
-class ChatGPTToken(Base):
-	__tablename__ = "chatgpt_tokens"
-
-	id = Column(String(100), primary_key=True, unique=True)
-	number_of_tokens = Column(Integer, default=0)
-	telegram_id = Column(BigInteger, ForeignKey("telegram_accounts.telegram_id", on_delete="CASCADE"))
