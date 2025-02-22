@@ -73,6 +73,16 @@ class TelegramAccount(Base):
 		return self
 
 
+	def spend_tokens(self, db: Session, tokens_to_spend: int):
+		"""Списывает токены пользователя."""
+		if self.number_chatgpt_tokens >= tokens_to_spend:
+			self.number_chatgpt_tokens -= tokens_to_spend
+			db.commit()
+			return self
+		else:
+			raise ValueError("Недостаточно токенов для выполнения операции.")
+
+
 
 class Message(Base):
 	__tablename__ = "messages"
