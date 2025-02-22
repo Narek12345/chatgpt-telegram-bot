@@ -48,6 +48,12 @@ class TelegramAccount(Base):
 		return self
 
 
+	def delete(self, db: Session):
+		"""Удаляет пользователя."""
+		db.delete(self)
+		db.commit()
+
+
 
 class Message(Base):
 	__tablename__ = "messages"
