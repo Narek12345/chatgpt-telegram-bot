@@ -69,6 +69,22 @@ class Message(Base):
 	user = relationship("TelegramAccount", back_populates="messages")
 
 
+	@classmethod
+	def create(cls, db: Session, telegram_id: int, message_type: str, message_text: str, token_usage: int = 0, is_bot: bool = False):
+		"""Создает сообщение."""
+		message = cls(
+			telegram_id=telegram_id,
+			message_type=message_type,
+			message_text=message_text,
+			token_usage=token_usage,
+			is_bot=is_bot
+		)
+		db.add(message)
+		db.commit()
+		db.refresh(message)
+		return message
+
+
 
 class ChatGPTToken(Base):
 	__tablename__ = "chatgpt_tokens"
