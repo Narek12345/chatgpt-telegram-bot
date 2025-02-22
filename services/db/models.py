@@ -85,6 +85,12 @@ class Message(Base):
 		return message
 
 
+	@classmethod
+	def get_by_user(cls, db: Session, telegram_id: int):
+		"""Получает все сообщения пользователя."""
+		return db.query(cls).filter(cls.telegram_id == telegram_id).all()
+
+
 
 class ChatGPTToken(Base):
 	__tablename__ = "chatgpt_tokens"
