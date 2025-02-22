@@ -34,6 +34,12 @@ class TelegramAccount(Base):
 		return user
 
 
+	@classmethod
+	def get(cls, db: Session, telegram_id: int):
+		"""Получает пользователя по telegram_id."""
+		return db.query(cls).filter(cls.telegram_id == telegram_id).first()
+
+
 
 class Message(Base):
 	__tablename__ = "messages"
