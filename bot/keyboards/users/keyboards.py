@@ -2,10 +2,9 @@ from aiogram.utils.keyboard import ReplyKeyboardMarkup, KeyboardButton
 
 
 kb_list = [
-	[KeyboardButton(text="Очистить историю диалога"), KeyboardButton(text="Отправить длинное сообщение")],
-	[KeyboardButton(text="✨Дополнительные возможности"), KeyboardButton(text="⚙️Версия ИИ")],
-	[KeyboardButton(text="💾Чаты"), KeyboardButton(text="💲Баланс"), KeyboardButton(text="🇷🇺Язык")],
-	[KeyboardButton(text="Текущий режим: текси ИИ")]
+	[KeyboardButton(text="👤 Мой аккаунт"), KeyboardButton(text="🧹 Очистить историю")],
+	[KeyboardButton(text="⚙️ Настройки"), KeyboardButton(text="🎭 GPT - Роли")],
+	[KeyboardButton(text="🚀 Премиум"), KeyboardButton(text="📚 Для учебы и работы")],
 ]
 
 keyboard = ReplyKeyboardMarkup(keyboard=kb_list, resize_keyboard=True)
