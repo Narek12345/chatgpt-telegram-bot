@@ -2,6 +2,9 @@ from aiogram import Router
 from aiogram.types import Message
 from aiogram.filters import Command
 
+from bot.keyboards.users.keyboards import keyboard
+
+
 start_router = Router()
 
 start_bot_text_ru = """
@@ -25,7 +28,7 @@ start_bot_text_ru = """
 
 @start_router.message(Command("start"))
 async def start_handler(message: Message):
-	await message.answer(start_bot_text_ru)
+	await message.answer(start_bot_text_ru, reply_markup=keyboard)
 
 
 def register_start_router(dp):
