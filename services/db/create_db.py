@@ -1,7 +1,7 @@
 import os
 
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession, AsyncAttrs
 from sqlalchemy.ext.asyncio import create_async_engine
 
 from contextlib import asynccontextmanager
@@ -35,3 +35,8 @@ async def get_session():
 		raise e
 	finally:
 		await session.close()
+
+
+
+class Base(AsyncAttrs, DeclarativeBase):
+	pass
