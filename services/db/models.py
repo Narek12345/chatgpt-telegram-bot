@@ -40,10 +40,10 @@ class Subscription(Base):
 	__tablename__ = "subscription"
 
 	subscription_id = Column(Integer, primary_key=True)
-	type = Column(String(30), default="free")
 	payment_date = Column(Date)
 	end_date = Column(Date)
 	payment_method = Column(String(20))
+	type_id = Column(Integer, ForeignKey('subscription_types.type_id'))
 
 
 
