@@ -20,3 +20,11 @@ class Users(Base):
 	language = relationship("Languages")
 	subscription = relationship("Subscription", uselist=False)
 	referral_link = relationship("ReferralLink", uselist=False)
+
+
+
+class ReferralLink(Base):
+	__tablename__ = "referral_link"
+
+	link = Column(String(50), unique=True)
+	number_invitees = Column(Integer, default=0)
