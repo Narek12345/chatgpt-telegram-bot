@@ -6,14 +6,11 @@ from sqlalchemy.ext.asyncio import create_async_engine
 
 from contextlib import asynccontextmanager
 
+from config import config
 
-POSTGRESQL_USERNAME = os.getenv("POSTGRESQL_USERNAME")
-POSTGRESQL_PASSWORD = os.getenv("POSTGRESQL_PASSWORD")
-POSTGRESQL_DB_HOST = os.getenv("POSTGRESQL_DB_HOST")
-POSTGRESQL_DB_NAME = os.getenv("POSTGRESQL_DB_NAME")
 
 engine = create_async_engine(
-	f"postgresql+asyncpg://{POSTGRESQL_USERNAME}:{POSTGRESQL_PASSWORD}@{POSTGRESQL_DB_HOST}/{POSTGRESQL_DB_NAME}",
+	f"postgresql+asyncpg://{config.POSTGRESQL_USERNAME}:{config.POSTGRESQL_PASSWORD}@{config.POSTGRESQL_DB_HOST}/{config.POSTGRESQL_DB_NAME}",
 )
 
 
@@ -38,5 +35,7 @@ async def get_session():
 
 
 
-class Base(AsyncAttrs, DeclarativeBase):
-	pass
+async def create_db():
+	async with engine.begin() as conn:
+		await conn.run_sync(Base.metadata.create_all)
+		print("запуск бд")
