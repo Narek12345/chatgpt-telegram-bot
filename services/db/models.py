@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Date, ForeignKey
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.ext.asyncio import AsyncAttrs
@@ -40,9 +40,9 @@ class Subscription(Base):
 	__tablename__ = "subscription"
 
 	subscription_id = Column(Integer, primary_key=True)
-	payment_date = Column(Date)
-	end_date = Column(Date)
-	payment_method = Column(String(20))
+	payment_date = Column(DateTime, default=None)
+	end_date = Column(DateTime, default=None)
+	payment_method = Column(String(20), default=None)
 	type_id = Column(Integer, ForeignKey('subscription_types.type_id'))
 
 	type = relationship("SubscriptionTypes")
@@ -63,8 +63,8 @@ class SubscriptionTypes(Base):
 
 	type_id = Column(Integer, primary_key=True)
 	type = Column(String(30), default="free")
-	create_at = Column(Date)
-	update_at = Column(Date)
+	created_at = Column(DateTime(timezone=True), server_default=func.now())
+	updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 	price_id = Column(Integer, ForeignKey("subscription_prices.price_id"))
 
 	price = relationship("SubscriptionPrices", uselist=False)
