@@ -4,6 +4,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.ext.asyncio import create_async_engine
 
+from contextlib import asynccontextmanager
+
 
 POSTGRESQL_USERNAME = os.getenv("POSTGRESQL_USERNAME")
 POSTGRESQL_PASSWORD = os.getenv("POSTGRESQL_PASSWORD")
@@ -19,3 +21,17 @@ def async_session_generator():
 	return sessionmaker(
 		engine, class_=AsyncSession
 	)
+
+
+@asynccontextmanager
+async def get_session():
+	try:
+		async_session = async_session_generator()
+
+		async with async_session() as session:
+			yield session
+	except Exception as e:
+		await session.rollback()
+		raise e
+	finally:
+		await session.close()
