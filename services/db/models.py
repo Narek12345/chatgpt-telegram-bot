@@ -45,6 +45,8 @@ class Subscription(Base):
 	payment_method = Column(String(20))
 	type_id = Column(Integer, ForeignKey('subscription_types.type_id'))
 
+	type = relationship("SubscriptionTypes")
+
 
 
 class ReferralLink(Base):
@@ -53,3 +55,16 @@ class ReferralLink(Base):
 	referral_link_id = Column(Integer, primary_key=True)
 	link = Column(String(50), unique=True)
 	number_invitees = Column(Integer, default=0)
+
+
+
+class SubscriptionTypes(Base):
+	__tablename__ = "subscription_types"
+
+	type_id = Column(Integer, primary_key=True)
+	type = Column(String(30), default="free")
+	create_at = Column(Date)
+	update_at = Column(Date)
+	price_id = Column(Integer, ForeignKey("subscription_prices.price_id"))
+
+	price = relationship("SubscriptionPrices", uselist=False)
