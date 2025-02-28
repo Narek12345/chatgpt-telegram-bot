@@ -8,7 +8,7 @@ from .create_db import Base, get_session
 class Users(Base):
 	__tablename__ = "users"
 
-	telegram_id = Column(Integer, primary_key=True, index=True)
+	telegram_id = Column(Integer, primary_key=True, autoincrement=False)
 	firstname = Column(String(100))
 	lastname = Column(String(100))
 	username = Column(String(100))
@@ -20,6 +20,14 @@ class Users(Base):
 	language = relationship("Languages")
 	subscription = relationship("Subscription", uselist=False)
 	referral_link = relationship("ReferralLink", uselist=False)
+
+
+
+class Languages(Base):
+	__tablename__ = "languages"
+
+	language_id = Column(Integer, primary_key=True)
+	language = Column(String(50), default="Русский")
 
 
 
