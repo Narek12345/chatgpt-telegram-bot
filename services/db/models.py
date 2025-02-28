@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
+from sqlalchemy import Column, String, Integer, Float, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.ext.asyncio import AsyncAttrs
@@ -68,3 +68,13 @@ class SubscriptionTypes(Base):
 	price_id = Column(Integer, ForeignKey("subscription_prices.price_id"))
 
 	price = relationship("SubscriptionPrices", uselist=False)
+
+
+
+class SubscriptionPrices(Base):
+	__tablename__ = "subscription_prices"
+
+	price_id = Column(Integer, primary_key=True)
+	price = Column(Float)
+	created_at = Column(DateTime(timezone=True), server_default=func.now())
+	updated_at = Column(DateTime(timezone=True), onupdate=func.now())
