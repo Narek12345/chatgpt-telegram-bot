@@ -86,7 +86,7 @@ class Models(Base):
 	__tablename__ = "models"
 
 	model_id = Column(Integer, primary_key=True)
-	model_name_id = Column(Integer, ForeignKey("models_name.model_name_id"))
+	model_name_id = Column(Integer, ForeignKey("model_names.model_name_id"))
 	model_type_id = Column(Integer, ForeignKey("model_types.model_type_id"))
 	model_limit_type_id = Column(Integer, ForeignKey("model_limit_types.model_limit_type_id"))
 	model_request_limit_id = Column(Integer, ForeignKey("model_request_limits.model_request_limit_id"))
