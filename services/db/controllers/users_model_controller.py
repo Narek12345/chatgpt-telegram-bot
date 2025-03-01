@@ -9,6 +9,6 @@ class UsersModelController(Users):
 	async def register(cls, **kwargs):
 		"""Регистрирует пользователя."""
 		new_user = cls(**kwargs)
-		session = await get_session()
-		await session.add(new_user)
-		await session.commit()
+		async with get_session() as session:
+			session.add(new_user)
+			await session.commit()
