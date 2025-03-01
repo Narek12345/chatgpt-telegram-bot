@@ -102,3 +102,11 @@ class ModelTypes(Base):
 
 	model_type_id = Column(Integer, primary_key=True)
 	model_type = Column(String(50))
+
+
+
+class ModelLimitTypes(Base):
+	__tablename__ = "model_limit_types"
+
+	model_limit_type_id = Column(Integer, primary_key=True)
+	limit_type = Column(String(50))
