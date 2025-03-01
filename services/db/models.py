@@ -110,3 +110,11 @@ class ModelLimitTypes(Base):
 
 	model_limit_type_id = Column(Integer, primary_key=True)
 	limit_type = Column(String(50))
+
+
+
+class ModelNames(Base):
+	__tablename__ = "model_names"
+
+	model_name_id = Column(Integer, primary_key=True)
+	model_name = Column(String(50))
