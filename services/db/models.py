@@ -88,11 +88,13 @@ class Models(Base):
 	model_name_id = Column(Integer, ForeignKey("models_name.model_name.id"))
 	model_type_id = Column(Integer, ForeignKey("model_types.model_type_id"))
 	model_limit_type_id = Column(Integer, ForeignKey("model_limit_types.model_limit_type_id"))
+	model_request_limit_id = Column(Integer, ForeignKey("model_request_limits.model_request_limit_id"))
 	user_id = Column(Integer, ForeignKey("users.telegram_id"))
 
-	model_name = relationship("ModelNames", uselist=False)
+	model_name = relationship("ModelNames")
 	model_type = relationship("ModelTypes")
 	model_limit_type = relationship("ModelLimitTypes")
+	model_request_limit = relationship("ModelRequestLimits", uselist=False)
 	user = relationship("Users")
 
 
