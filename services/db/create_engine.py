@@ -17,7 +17,7 @@ engine = create_async_engine(
 
 def async_session_generator():
 	return sessionmaker(
-		engine, class_=AsyncSession
+		engine, expire_on_commit=False, class_=AsyncSession
 	)
 
 
