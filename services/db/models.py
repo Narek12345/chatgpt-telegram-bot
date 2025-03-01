@@ -78,3 +78,19 @@ class SubscriptionPrices(Base):
 	price = Column(Float)
 	created_at = Column(DateTime(timezone=True), server_default=func.now())
 	updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+
+
+
+class Models(Base):
+	__tablename__ = "models"
+
+	model_id = Column(Integer, primary_key=True)
+	model_name_id = Column(Integer, ForeignKey("models_name.model_name.id"))
+	model_type_id = Column(Integer, ForeignKey("model_types.model_type_id"))
+	model_limit_type_id = Column(Integer, ForeignKey("model_limit_types.model_limit_type_id"))
+	user_id = Column(Integer, ForeignKey("users.telegram_id"))
+
+	model_name = relationship("ModelNames", uselist=False)
+	model_type = relationship("ModelTypes")
+	model_limit_type = relationship("ModelLimitTypes")
+	user = relationship("Users")
