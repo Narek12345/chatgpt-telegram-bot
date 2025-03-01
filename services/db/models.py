@@ -141,6 +141,6 @@ class GeneratedObjects(Base):
 	generated_object_id = Column(Integer, primary_key=True)
 	object_name = Column(String(50))
 	number_tokens_spent = Column(Integer, default=0)
-	user_id = Column(Integer, ForeignKey("users.user_id"))
+	user_id = Column(Integer, ForeignKey("users.telegram_id"))
 
 	user = relationship("Users")
