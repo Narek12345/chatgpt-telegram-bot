@@ -33,4 +33,3 @@ async def get_session():
 		raise e
 	finally:
 		await session.close()
-
