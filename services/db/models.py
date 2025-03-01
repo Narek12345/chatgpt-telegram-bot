@@ -143,3 +143,12 @@ class GeneratedObjects(Base):
 	user_id = Column(Integer, ForeignKey("users.user_id"))
 
 	user = relationship("Users")
+
+
+class SubscriptionTypes(Base):
+	__tablename__ = "subscription_types"
+
+	type_id = Column(Integer, primary_key=True)
+	created_at = Column(DateTime(timezone=True), server_default=func.now())
+	updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+	price_id = Column(Integer, ForeignKey("subscription_prices.price_id"))
