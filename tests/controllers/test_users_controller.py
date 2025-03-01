@@ -1,10 +1,11 @@
 import pytest
 
 from services.db.controllers.users_model_controller import UsersModelController
+from tests.base import BaseTest
 
 
 
-class TestUsersModelController():
+class TestUsersModelController(BaseTest):
 
 
 	@pytest.mark.asyncio
