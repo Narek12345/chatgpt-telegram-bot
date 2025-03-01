@@ -3,7 +3,7 @@ from services.db.create_engine import get_session
 
 
 
-class UsersController(Users):
+class UsersModelController(Users):
 
 	@classmethod
 	async def register(cls, **kwargs):
