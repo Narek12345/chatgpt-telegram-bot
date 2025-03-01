@@ -120,3 +120,14 @@ class ModelNames(Base):
 
 	model_name_id = Column(Integer, primary_key=True)
 	model_name = Column(String(50))
+
+
+
+class ModelRequestLimits(Base):
+	__tablename__ = "model_request_limits"
+
+	model_request_limit_id = Column(Integer, primary_key=True)
+	available_requests = Column(Integer)
+	available_tokens = Column(Integer)
+	number_requests = Column(Integer)
+	number_tokens = Column(Integer)
