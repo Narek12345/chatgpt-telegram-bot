@@ -94,3 +94,11 @@ class Models(Base):
 	model_type = relationship("ModelTypes")
 	model_limit_type = relationship("ModelLimitTypes")
 	user = relationship("Users")
+
+
+
+class ModelTypes(Base):
+	__tablename__ = "model_types"
+
+	model_type_id = Column(Integer, primary_key=True)
+	model_type = Column(String(50))
